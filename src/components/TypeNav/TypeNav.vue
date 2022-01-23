@@ -2,7 +2,7 @@
     <!-- 商品分类导航 -->
     <div class="type-nav">
         <div class="container">
-            <h2 class="all">全部商品分类</h2>
+            <h2 class="all" @mouseenter="show=true" @mouseleave="leaveShow">全部商品分类</h2>
             <nav class="nav">
                 <a href="#">服装城</a>
                 <a href="#">美妆馆</a>
@@ -13,389 +13,24 @@
                 <a href="#">有趣</a>
                 <a href="#">秒杀</a>
             </nav>
-            <div class="sort">
-                <div class="all-sort-list2">
-                    <div class="item bo">
+            <div class="sort" v-show="show" @mouseenter="show=true" @mouseleave="leaveShow">
+                <div class="all-sort-list2" @click="toSearch">
+                    <div class="item" v-for="item in categoryList" :key="item.categoryId">
                         <h3>
-                            <a href="#">图书、音像、数字商品</a>
+                            <a :data-categoryName="item.categoryName"
+                               :data-categoryId1="item.categoryId">{{ item.categoryName }}</a>
                         </h3>
                         <div class="item-list clearfix">
-                            <div class="subitem">
+                            <div class="subitem" v-for="subitem in item.categoryChild" :key="subitem.categoryId">
                                 <dl class="fore">
                                     <dt>
-                                        <a href="#">电子书</a>
+                                        <a :data-categoryName="subitem.categoryName"
+                                           :data-categoryId2="subitem.categoryId">{{ subitem.categoryName }}</a>
                                     </dt>
                                     <dd>
-                                        <em>
-                                            <a href="#">婚恋/两性</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">文学</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">经管</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">畅读VIP</a>
-                                        </em>
-                                    </dd>
-                                </dl>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <h3>
-                            <a href="#">家用电器</a>
-                        </h3>
-                        <div class="item-list clearfix">
-                            <div class="subitem">
-                                <dl class="fore">
-                                    <dt>
-                                        <a href="#">电子书1</a>
-                                    </dt>
-                                    <dd>
-                                        <em>
-                                            <a href="#">免费</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">小说</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">励志与成功</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">婚恋/两性</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">文学</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">经管</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">畅读VIP</a>
-                                        </em>
-                                    </dd>
-                                </dl>
-                                <dl class="fore">
-                                    <dt>
-                                        <a href="#">数字音乐</a>
-                                    </dt>
-                                    <dd>
-                                        <em>
-                                            <a href="#">通俗流行</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">古典音乐</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">摇滚说唱</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">爵士蓝调</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">乡村民谣</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">有声读物</a>
-                                        </em>
-                                    </dd>
-                                </dl>
-                                <dl class="fore">
-                                    <dt>
-                                        <a href="#">音像</a>
-                                    </dt>
-                                    <dd>
-                                        <em>
-                                            <a href="#">音乐</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">影视</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">教育音像</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">游戏</a>
-                                        </em>
-                                    </dd>
-                                </dl>
-                                <dl class="fore">
-                                    <dt>文艺</dt>
-                                    <dd>
-                                        <em>
-                                            <a href="#">小说</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">文学</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">青春文学</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">传记</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">艺术</a>
-                                        </em>
-                                    </dd>
-                                </dl>
-                                <dl class="fore">
-                                    <dt>人文社科</dt>
-                                    <dd>
-                                        <em>
-                                            <a href="#">历史</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">心理学</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">政治/军事</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">国学/古籍</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">哲学/宗教</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">社会科学</a>
-                                        </em>
-                                    </dd>
-                                </dl>
-                                <dl class="fore">
-                                    <dt>经管励志</dt>
-                                    <dd>
-                                        <em>
-                                            <a href="#">经济</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">金融与投资</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">管理</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">励志与成功</a>
-                                        </em>
-                                    </dd>
-                                </dl>
-                                <dl class="fore">
-                                    <dt>生活</dt>
-                                    <dd>
-                                        <em>
-                                            <a href="#">家庭与育儿</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">旅游/地图</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">烹饪/美食</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">时尚/美妆</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">家居</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">婚恋与两性</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">娱乐/休闲</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">健身与保健</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">动漫/幽默</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">体育/运动</a>
-                                        </em>
-                                    </dd>
-                                </dl>
-                                <dl class="fore">
-                                    <dt>科技</dt>
-                                    <dd>
-                                        <em>
-                                            <a href="#">科普</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">IT</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">建筑</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">医学</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">工业技术</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">电子/通信</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">农林</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">科学与自然</a>
-                                        </em>
-                                    </dd>
-                                </dl>
-                                <dl class="fore">
-                                    <dt>少儿</dt>
-                                    <dd>
-                                        <em>
-                                            <a href="#">少儿</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">0-2岁</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">3-6岁</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">7-10岁</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">11-14岁</a>
-                                        </em>
-                                    </dd>
-                                </dl>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <h3>
-                            <a href="#">手机、数码、充值</a>
-                        </h3>
-                        <div class="item-list clearfix">
-                            <div class="subitem">
-                                <dl class="fore">
-                                    <dt>
-                                        <a href="#">充值</a>
-                                    </dt>
-                                    <dd>
-                                        <em>
-                                            <a href="#">充值</a>
-                                        </em>
-                                    </dd>
-                                </dl>
-                                <dl class="fore">
-                                    <dt>
-                                        <a href="#">电子书2</a>
-                                    </dt>
-                                    <dd>
-                                        <em>
-                                            <a href="#">免费</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">小说</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">励志与成功</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">婚恋/两性</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">文学</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">经管</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">畅读VIP</a>
-                                        </em>
-                                    </dd>
-                                </dl>
-                                <dl class="fore">
-                                    <dt>
-                                        <a href="#">数字音乐</a>
-                                    </dt>
-                                    <dd>
-                                        <em>
-                                            <a href="#">通俗流行</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">古典音乐</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">摇滚说唱</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">爵士蓝调</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">乡村民谣</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">有声读物</a>
-                                        </em>
-                                    </dd>
-                                </dl>
-                                <dl class="fore">
-                                    <dt>
-                                        <a href="#">音像</a>
-                                    </dt>
-                                    <dd>
-                                        <em>
-                                            <a href="#">音乐</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">影视</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">教育音像</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">游戏</a>
-                                        </em>
-                                    </dd>
-                                </dl>
-                                <dl class="fore">
-                                    <dt>文艺</dt>
-                                    <dd>
-                                        <em>
-                                            <a href="#">小说</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">文学</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">青春文学</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">传记</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">艺术</a>
-                                        </em>
-                                    </dd>
-                                </dl>
-                                <dl class="fore">
-                                    <dt>人文社科</dt>
-                                    <dd>
-                                        <em>
-                                            <a href="#">历史</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">心理学</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">政治/军事</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">国学/古籍</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">哲学/宗教</a>
-                                        </em>
-                                        <em>
-                                            <a href="#">社会科学</a>
+                                        <em v-for="em in subitem.categoryChild" :key="em.categoryId">
+                                            <a :data-categoryName="em.categoryName"
+                                               :data-categoryId3="em.categoryId">{{ em.categoryName }}</a>
                                         </em>
                                     </dd>
                                 </dl>
@@ -409,9 +44,54 @@
 </template>
 
 <script>
-export default {
-    name: 'TypeNav'
+import {mapState} from 'vuex'
 
+export default {
+    name: 'TypeNav',
+    mounted() {
+        if (this.$route.path !== '/home') {//不在home首页就隐藏
+            this.show = false
+        }
+    },
+    data() {
+        return {
+            show: true
+        }
+    },
+    computed: {
+        ...mapState({
+            categoryList(state) {
+                return state.home.categoryList
+            }
+        })
+    },
+    methods: {
+        toSearch(event) {
+            const {categoryname, categoryid1, categoryid2, categoryid3} = event.target.dataset
+            console.log(event.target.dataset)
+            if (categoryname) {
+                const location = {name: 'search'}
+                const query = {categoryName: categoryname}
+                if (categoryid1) {
+                    query.categoryId1 = categoryid1
+                } else if (categoryid2) {
+                    query.categoryId2 = categoryid2
+                } else {
+                    query.categoryId2 = categoryid3
+                }
+                location.query = query
+                if (this.$route.params){
+                    location.params=this.$route.params
+                }
+                this.$router.push(location)
+            }
+        },
+        leaveShow(){
+            if (this.$route.path!=='/home'){
+                this.show=false
+            }
+        }
+    }
 }
 </script>
 
@@ -456,14 +136,22 @@ export default {
             z-index: 999;
 
             .all-sort-list2 {
+                a {
+                    cursor: pointer;
+                }
+
                 .item {
                     h3 {
-                        line-height: 30px;
+                        line-height: 27px;
                         font-size: 14px;
                         font-weight: 400;
                         overflow: hidden;
                         padding: 0 20px;
                         margin: 0;
+
+                        &:hover {
+                            background-color: rgba(220, 54, 54, 0.3);
+                        }
 
                         a {
                             color: #333;
@@ -502,14 +190,14 @@ export default {
                                     width: 54px;
                                     line-height: 22px;
                                     text-align: right;
-                                    padding: 3px 6px 0 0;
+                                    padding: 0 6px 0 0;
                                     font-weight: 700;
                                 }
 
                                 dd {
                                     float: left;
-                                    width: 415px;
-                                    padding: 3px 0 0;
+                                    width: 590px;
+                                    padding: 1px 0 0;
                                     overflow: hidden;
 
                                     em {

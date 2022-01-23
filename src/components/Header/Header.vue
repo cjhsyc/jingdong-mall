@@ -37,19 +37,23 @@
 <script>
 export default {
     name: "Header",
-    data(){
-        return{
-            keyword:''
+    data() {
+        return {
+            keyword: ''
         }
     },
-    methods:{
-        toSearch(){//点击搜索按钮跳转到搜索页面
+    methods: {
+        toSearch() {//点击搜索按钮跳转到搜索页面
             //字符串写法（传递params参数需要在路由中设置占位符）
             // this.$router.push('/search/'+this.keyword+'?k='+this.keyword.toUpperCase())
             //模板字符串写法
             // this.$router.push(`/search/${this.keyword}?k=${this.keyword.toUpperCase()}`)
             //对象写法(需要在路由中设置name，因为params参数不能配合path进行传参，query参数配合两种都可以)
-            this.$router.push({name:'search',params:{keyWord:this.keyword||undefined},query:{k:this.keyword.toUpperCase()}})
+            const location={name: 'search', params: {keyWord: this.keyword || undefined}}
+            if (this.$route.query){
+                location.query=this.$route.query
+            }
+            this.$router.push(location)
         }
     }
 }
@@ -64,7 +68,7 @@ export default {
     font-size: 12px;
 }
 
-#shortcut ul{
+#shortcut ul {
     display: flex;
     justify-content: center;
 }
@@ -81,7 +85,7 @@ export default {
     border-left: 1px solid #999999;
 }
 
-#header{
+#header {
     display: flex;
     justify-content: space-evenly;
 }
@@ -119,7 +123,7 @@ export default {
     cursor: pointer;
 }
 
-#cart{
+#cart {
     border: 1px solid #eee;
     height: 35px;
     margin-top: 30px;
@@ -127,20 +131,20 @@ export default {
     line-height: 35px;
 }
 
-#cart:hover{
+#cart:hover {
     border-color: #e1251b;
 }
 
-#cart a{
+#cart a {
     color: #e1251b;
     margin-left: 15px;
 }
 
-#cart span{
+#cart span {
     margin-left: 5px;
 }
 
-#cart img{
+#cart img {
     width: 20px;
 }
 
