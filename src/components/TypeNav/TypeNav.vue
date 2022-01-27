@@ -73,11 +73,11 @@ export default {
                 const location = {name: 'search'}
                 const query = {categoryName: categoryname}
                 if (categoryid1) {
-                    query.categoryId1 = categoryid1
+                    query.category1Id = categoryid1
                 } else if (categoryid2) {
-                    query.categoryId2 = categoryid2
+                    query.category2Id = categoryid2
                 } else {
-                    query.categoryId2 = categoryid3
+                    query.category3Id = categoryid3
                 }
                 location.query = query
                 if (this.$route.params){

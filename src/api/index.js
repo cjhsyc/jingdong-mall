@@ -6,3 +6,8 @@ export const reqBaseCategoryList = () => requests({url: '/product/getBaseCategor
 
 //首页轮播图接口
 export const reqBannerList = () => mockRequests.get('/banner')
+//floor数据
+export const reqFloorList = () => mockRequests.get('/floor')
+
+//搜索数据
+export const reqSearchInfo=(params)=> requests.post('/list',params)

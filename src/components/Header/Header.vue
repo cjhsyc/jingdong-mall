@@ -49,7 +49,7 @@ export default {
             //模板字符串写法
             // this.$router.push(`/search/${this.keyword}?k=${this.keyword.toUpperCase()}`)
             //对象写法(需要在路由中设置name，因为params参数不能配合path进行传参，query参数配合两种都可以)
-            const location={name: 'search', params: {keyWord: this.keyword || undefined}}
+            const location={name: 'search', params: {keyword: this.keyword || undefined}}
             if (this.$route.query){
                 location.query=this.$route.query
             }
