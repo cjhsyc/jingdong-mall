@@ -21,7 +21,7 @@
                     <a>下一页»</a>
                 </li>
             </ul>
-            <div><span>共{{ page }}页&nbsp;</span></div>
+            <div><span>共{{ total }}条&nbsp;</span></div>
         </div>
     </div>
 </template>

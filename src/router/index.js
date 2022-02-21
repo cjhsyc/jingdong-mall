@@ -21,5 +21,8 @@ VueRouter.prototype.replace=function (location,resolve,reject){
 }
 
 export default new VueRouter({
-    routes
+    routes,
+    scrollBehavior (to, from, savedPosition) {
+        return { y: 0 }//路由跳转，回到顶部
+    }
 })

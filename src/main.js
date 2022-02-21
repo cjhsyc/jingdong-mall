@@ -10,11 +10,14 @@ import './mock/mockServe'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
-Vue.component(TypeNav.name,TypeNav)
-Vue.component(Pagination.name,Pagination)
+Vue.component(TypeNav.name, TypeNav)
+Vue.component(Pagination.name, Pagination)
 
 new Vue({
-  render: h => h(App),
-  router,//注册路由
-  store,//注册仓库
+    render: h => h(App),
+    router,//注册路由
+    store,//注册仓库
+    beforeCreate() {
+        Vue.prototype.$bus=this
+    }
 }).$mount('#app')

@@ -10,4 +10,10 @@ export const reqBannerList = () => mockRequests.get('/banner')
 export const reqFloorList = () => mockRequests.get('/floor')
 
 //搜索数据
-export const reqSearchInfo=(params)=> requests.post('/list',params)
+export const reqSearchInfo = (params) => requests.post('/list', params)
+
+//获取商品详情
+export const reqGoodsInfo = (id) => requests.get(`/item/${id}`)
+
+//将产品添加到购物车中，或者更新以添加产品数量
+export const reqAddToCard = (id, num) => requests.post(`/cart/addToCard/${id}/${num}`)
