@@ -79,7 +79,7 @@
                                 <a href="javascript:" class="mins" @click="num>1?num--:num=1">-</a>
                             </div>
                             <div class="add">
-                                <a href="javascript:">加入购物车</a>
+                                <a @click="addToCart()">加入购物车</a>
                             </div>
                         </div>
                     </div>
@@ -362,11 +362,19 @@ export default {
             ele.isChecked = '1'
         },
         changeNum(event) {
-            if (event.target.value<1){
-                this.num=1
-            }else {
-                this.num=Math.floor(this.num)
+            if (event.target.value < 1) {
+                this.num = 1
+            } else {
+                this.num = Math.floor(this.num)
             }
+        },
+        addToCart() {
+            this.$store.dispatch('addToCart', {id: this.$route.params.id, num: this.num}).then(()=>{
+                sessionStorage.setItem('skuInfo',JSON.stringify(this.skuInfo))
+                this.$router.push({path:'/addCartSuccess',query:{num:this.num.toString()}})
+            }).catch(()=>{
+                alert('失败！')
+            })
         }
     }
 }
@@ -580,7 +588,7 @@ export default {
 
                         .add {
                             float: left;
-
+                            cursor: pointer;
                             a {
                                 background-color: #e1251b;
                                 padding: 0 25px;

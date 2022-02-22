@@ -1,7 +1,9 @@
-import {reqGoodsInfo} from "@/api";
+import {reqAddToCart, reqGoodsInfo} from "@/api";
+import getUuid from "@/utils/getUuid";
 
 const state = {
-    goodsInfo: {}
+    goodsInfo: {},
+    uuid: getUuid()
 }
 const mutations = {
     getGoodsInfo(state, data) {
@@ -13,6 +15,14 @@ const actions = {
         const result = await reqGoodsInfo(id)
         if (result.code === 200) {
             commit('getGoodsInfo', result.data)
+        }
+    },
+    async addToCart({commit}, {id, num}) {//该函数返回的是promise对象
+        const result = await reqAddToCart(id, num)
+        if (result.code === 200) {
+            return 'ok'
+        } else {
+            return Promise.reject(new Error('fail'))
         }
     }
 }

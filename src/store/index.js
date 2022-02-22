@@ -7,10 +7,11 @@ Vue.use(Vuex)
 import home from './Home'
 import search from './Search'
 import detail from './Detail'
+import cart from './Cart'
 
 //暴露一个store类的实例对象
 export default new Vuex.Store({
     modules:{
-        home,search,detail
+        home,search,detail,cart
     }
 })

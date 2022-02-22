@@ -26,7 +26,6 @@ export default {
         skuImageList() {
             this.$nextTick(() => {
                 new Swiper(this.$refs.imageList, {
-                    loop: true, // 循环模式选项
                     slidesPerView: 3,//同时显示的slide的数量
                     // 如果需要前进后退按钮
                     navigation: {

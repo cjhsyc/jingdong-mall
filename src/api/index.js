@@ -16,4 +16,7 @@ export const reqSearchInfo = (params) => requests.post('/list', params)
 export const reqGoodsInfo = (id) => requests.get(`/item/${id}`)
 
 //将产品添加到购物车中，或者更新以添加产品数量
-export const reqAddToCard = (id, num) => requests.post(`/cart/addToCard/${id}/${num}`)
+export const reqAddToCart = (id, num) => requests.post(`/cart/addToCart/${id}/${num}`)
+
+//获取购物车列表数据
+export const reqCartList = () => requests({url: '/cart/cartList', method: 'get'})

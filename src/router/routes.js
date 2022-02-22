@@ -3,48 +3,64 @@ import Login from '../pages/Login/Login'
 import Search from '../pages/Search/Search'
 import Register from '../pages/Register/Register'
 import Detail from '../pages/Detail/Detail'
+import AddCartSuccess from '@/pages/AddCartSuccess/AddCartSuccess'
+import ShopCart from '@/pages/ShopCart/ShopCart'
 
 export default [
     //重定向：项目刚开始访问/时，定向到首页
     {
-        path:'/',
-        redirect:'/home'
+        path: '/',
+        redirect: '/home'
     },
     {
-        path:'/home',
-        component:Home,
-        meta:{
-            show:true
+        path: '/home',
+        component: Home,
+        meta: {
+            show: true
         }
     },
     {
-        path:'/login',
-        component:Login,
-        meta:{
-            show:false
+        path: '/login',
+        component: Login,
+        meta: {
+            show: false
         }
     },
     {
-        path:'/search/:keyword?',
-        component:Search,
-        meta:{
-            show:true
+        path: '/search/:keyword?',
+        component: Search,
+        meta: {
+            show: true
         },
-        name:'search',
-        props:true,
+        name: 'search',
+        props: true,
         /*props:($route)=>{
             return {keyword:$route.params.keyword}
         }*/
     },
     {
-        path:'/register',
-        component:Register,
-        meta:{
-            show:false
+        path: '/register',
+        component: Register,
+        meta: {
+            show: false
         }
     },
     {
-        path:'/detail/:id',
-        component:Detail
+        path: '/detail/:id',
+        component: Detail
+    },
+    {
+        path: '/addCartSuccess',
+        component: AddCartSuccess,
+        meta: {
+            show: true
+        }
+    },
+    {
+        path: '/shopCart',
+        component: ShopCart,
+        meta: {
+            show: true
+        }
     }
 ]
