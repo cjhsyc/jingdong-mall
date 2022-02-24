@@ -373,7 +373,7 @@ export default {
                 sessionStorage.setItem('skuInfo',JSON.stringify(this.skuInfo))
                 this.$router.push({path:'/addCartSuccess',query:{num:this.num.toString()}})
             }).catch(()=>{
-                alert('失败！')
+                alert('添加失败！')
             })
         }
     }

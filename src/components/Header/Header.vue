@@ -6,14 +6,14 @@
                     <router-link to="/login">你好，请登录</router-link>
                     <router-link to="/register" class="register">免费注册</router-link>
                 </li>
-                <li><a href="#">我的订单</a></li>
-                <li><a href="#">我的购物车</a></li>
-                <li><a href="#">我的京东</a></li>
-                <li><a href="#">京东会员</a></li>
-                <li><a href="#">企业采购</a></li>
-                <li><a href="#">关注京东</a></li>
-                <li><a href="#">合作招商</a></li>
-                <li><a href="#">商家后台</a></li>
+                <li><a>我的订单</a></li>
+                <li><router-link to="/shopCart">我的购物车</router-link></li>
+                <li><a>我的京东</a></li>
+                <li><a>京东会员</a></li>
+                <li><a>企业采购</a></li>
+                <li><a>关注京东</a></li>
+                <li><a>合作招商</a></li>
+                <li><a>商家后台</a></li>
             </ul>
         </div>
         <div id="header">
@@ -28,7 +28,7 @@
             </div>
             <div id="cart">
                 <span><img src="./image/cart.png" alt="cart"></span>
-                <a href="#">我的购物车</a>
+                <router-link to="/shopCart">我的购物车</router-link>
             </div>
         </div>
     </div>

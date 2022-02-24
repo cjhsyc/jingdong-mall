@@ -13,7 +13,8 @@
             <div class="cart-body">
                 <ul class="cart-list" v-for="item in cartInfoList" :key="item.id">
                     <li class="cart-list-con1">
-                        <input type="checkbox" name="chk_list" :checked="item.isChecked===1">
+                        <input type="checkbox" name="chk_list" :checked="item.isChecked===1"
+                               @change="updateChecked(item.skuId,item.isChecked)">
                     </li>
                     <li class="cart-list-con2">
                         <img :src="item.imgUrl">
@@ -23,15 +24,16 @@
                         <span class="price">{{ item.skuPrice }}.00</span>
                     </li>
                     <li class="cart-list-con5">
-                        <a class="mins">-</a>
-                        <input autocomplete="off" type="text" :value="item.skuNum" minnum="1" class="itxt">
-                        <a class="plus">+</a>
+                        <a class="mins" @click="handler('minus',item)">-</a>
+                        <input autocomplete="off" type="text" :value="item.skuNum" class="itxt"
+                               @change="handler('change',item,$event.target.value)">
+                        <a class="plus" @click="handler('plus',item)">+</a>
                     </li>
                     <li class="cart-list-con6">
                         <span class="sum">{{ item.skuNum * item.skuPrice }}</span>
                     </li>
                     <li class="cart-list-con7">
-                        <a class="sindelet">删除</a>
+                        <a class="sindelet" @click="deleteCart(item.skuId)">删除</a>
                         <br>
                         <a>移到收藏</a>
                     </li>
@@ -40,11 +42,12 @@
         </div>
         <div class="cart-tool">
             <div class="select-all">
-                <input class="chooseAll" type="checkbox" v-model="isAllChecked">
+                <input class="chooseAll" type="checkbox" :checked="isAllChecked&&cartInfoList.length>0"
+                       @change="checkedAll">
                 <span>全选</span>
             </div>
             <div class="option">
-                <a>删除选中的商品</a>
+                <a @click="deleteAllCheckedCart">删除选中的商品</a>
                 <a>移到我的关注</a>
                 <a>清除下柜商品</a>
             </div>
@@ -66,6 +69,7 @@
 
 <script>
 import {mapGetters} from "vuex";
+import {throttle} from "lodash/function";
 
 export default {
     name: 'ShopCart',
@@ -89,14 +93,69 @@ export default {
                 return item.isChecked === 1
             })
         },
-        totalNum(){
-            return this.cartInfoList.reduce((pre,item)=>{
-                if (item.isChecked === 1){
-                    return pre+item.skuNum
-                }else {
+        totalNum() {
+            return this.cartInfoList.reduce((pre, item) => {
+                if (item.isChecked === 1) {
+                    return pre + item.skuNum
+                } else {
                     return pre
                 }
-            },0)
+            }, 0)
+        }
+    },
+    methods: {
+        handler: throttle(function (type, cart, disNum = 0) {
+            switch (type) {
+                case 'plus':
+                    disNum = 1
+                    break
+                case 'minus':
+                    disNum = cart.skuNum > 1 ? -1 : 0
+                    break
+                case 'change':
+                    disNum = parseInt(disNum)
+                    if (disNum < 1 || Number.isNaN(disNum)) {
+                        disNum = 0
+                    } else {
+                        disNum = disNum - cart.skuNum
+                    }
+                    break
+            }
+            this.$store.dispatch('addToCart', {id: cart.skuId, num: disNum}).then(() => {
+                this.$store.dispatch('getCartList')
+            }).catch(() => {
+                alert('修改失败！')
+            })
+        }, 500),
+        deleteCart(id) {
+            this.$store.dispatch('deleteCart', id).then(() => {
+                this.$store.dispatch('getCartList')
+            }).catch(() => {
+                alert('删除失败！')
+            })
+        },
+        updateChecked(id, isChecked) {
+            isChecked = isChecked === 1 ? 0 : 1
+            this.$store.dispatch('updateChecked', {id, isChecked}).then(() => {
+                this.$store.dispatch('getCartList')
+            }).catch(() => {
+                console.log('修改失败！')
+            })
+        },
+        deleteAllCheckedCart() {
+            this.$store.dispatch('deleteAllCheckedCart').then(() => {
+                this.$store.dispatch('getCartList')
+            }).catch(() => {
+                console.log('删除失败！')
+            })
+        },
+        checkedAll(event) {
+            const isChecked = event.target.checked ? 1 : 0
+            this.$store.dispatch('checkedAll', isChecked).then(() => {
+                this.$store.dispatch('getCartList')
+            }).catch(() => {
+                console.log('失败！')
+            })
         }
     }
 }
@@ -145,7 +204,6 @@ export default {
             .cart-th5,
             .cart-th6 {
                 width: 12.5%;
-
             }
         }
 
@@ -199,6 +257,7 @@ export default {
                         width: 6px;
                         text-align: center;
                         padding: 8px;
+                        cursor: pointer;
                     }
 
                     input {
@@ -216,8 +275,9 @@ export default {
                         float: left;
                         color: #666;
                         width: 6px;
-                        text-align: center;
                         padding: 8px;
+                        text-align: center;
+                        cursor: pointer;
                     }
                 }
 
@@ -234,6 +294,11 @@ export default {
 
                     a {
                         color: #666;
+                        cursor: default;
+
+                        &:hover {
+                            color: #e1251b;
+                        }
                     }
                 }
             }
@@ -267,6 +332,11 @@ export default {
                 float: left;
                 padding: 0 10px;
                 color: #666;
+                cursor: default;
+
+                &:hover {
+                    color: #e1251b;
+                }
             }
         }
 
