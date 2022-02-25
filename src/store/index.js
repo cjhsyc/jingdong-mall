@@ -8,10 +8,11 @@ import home from './Home'
 import search from './Search'
 import detail from './Detail'
 import cart from './Cart'
+import user from './User'
 
 //暴露一个store类的实例对象
 export default new Vuex.Store({
     modules:{
-        home,search,detail,cart
+        home,search,detail,cart,user
     }
 })

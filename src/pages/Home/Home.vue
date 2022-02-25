@@ -31,8 +31,9 @@ export default {
             }
         })
     },
-    created() {
+    mounted() {
         this.$store.dispatch('getFloorList')
+        this.$store.dispatch('getUserInfo')
     },
 
 }

@@ -18,6 +18,20 @@ export const reqAddToCart = (id, num) => requests.post(`/cart/addToCart/${id}/${
 //获取购物车列表数据
 export const reqCartList = () => requests({url: '/cart/cartList', method: 'get'})
 //删除购物车产品
-export const reqDeleteCart=(id)=>requests(({url:`/cart/deleteCart/${id}`,method:'delete'}))
+export const reqDeleteCart = (id) => requests(({url: `/cart/deleteCart/${id}`, method: 'delete'}))
 //修改商品选中状态
-export const reqUpdateChecked=(id,ischecked)=>requests({url:`/cart/checkCart/${id}/${ischecked}`,method:'get'})
+export const reqUpdateChecked = (id, ischecked) => requests({url: `/cart/checkCart/${id}/${ischecked}`, method: 'get'})
+//获取登录验证码
+export const reqGetCode = (phone) => requests.get(`/user/passport/sendCode/${phone}`)
+//注册接口
+export const reqRegister = (data) => requests.post(`/user/passport/register`, {
+    phone: data.phoneNum,
+    code: data.code,
+    password: data.password
+})
+//登录接口
+export const reqLogin = (data) => requests.post('/user/passport/login', data)
+//获取用户信息(请求头中带上)
+export const reqUserInfo = () => requests.get('/user/passport/auth/getUserInfo')
+//退出登录
+export const reqlogout = () => requests.get('/user/passport/logout')

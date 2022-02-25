@@ -2,9 +2,13 @@
     <div>
         <div id="shortcut">
             <ul>
-                <li>
+                <li v-if="!nickName">
                     <router-link to="/login">你好，请登录</router-link>
                     <router-link to="/register" class="register">免费注册</router-link>
+                </li>
+                <li v-else>
+                    <a>{{ nickName }}</a>
+                    <a class="register" @click="logout">退出登录</a>
                 </li>
                 <li><a>我的订单</a></li>
                 <li><router-link to="/shopCart">我的购物车</router-link></li>
@@ -54,6 +58,18 @@ export default {
                 location.query=this.$route.query
             }
             this.$router.push(location)
+        },
+        logout(){
+            this.$store.dispatch('logout').then(()=>{
+                this.$router.push('/')
+            }).catch(()=>{
+                alert('退出登录失败！')
+            })
+        }
+    },
+    computed:{
+        nickName(){
+            return this.$store.state.user.userInfo.nickName
         }
     }
 }
@@ -79,6 +95,7 @@ export default {
 
 #shortcut li a {
     padding: 0 10px;
+    cursor: pointer;
 }
 
 #shortcut li:not(:first-child) a {

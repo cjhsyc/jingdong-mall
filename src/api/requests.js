@@ -15,9 +15,12 @@ const requests = axios.create({
 //请求拦截器，在请求之前可以进行一些操作
 requests.interceptors.request.use((config) => {
     //config：配置对象，其中一个属性是headers（请求头）
-    if (store.state.detail.uuid) {
+    if (store.state.detail.uuid) {//游客临时身份
         //在请求头中添加一个字段，和后端商量好字段名
         config.headers.userTempId = store.state.detail.uuid
+    }
+    if (store.state.user.token) {
+        config.headers.token = store.state.user.token
     }
     //进度条开始
     nprogress.start()
