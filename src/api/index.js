@@ -34,4 +34,14 @@ export const reqLogin = (data) => requests.post('/user/passport/login', data)
 //获取用户信息(请求头中带上)
 export const reqUserInfo = () => requests.get('/user/passport/auth/getUserInfo')
 //退出登录
-export const reqlogout = () => requests.get('/user/passport/logout')
+export const reqLogout = () => requests.get('/user/passport/logout')
+//获取用户地址信息
+export const reqAddress=()=> requests.get('/user/userAddress/auth/findUserAddressList')
+//获取商品清单
+export const reqOrderInfo=()=>requests.get('/order/auth/trade')
+//提交订单
+export const reqSubmitOrder=(tradeNo,data)=>requests.post(`/order/auth/submitOrder?tradeNo=${tradeNo}`,data)
+//获取订单支付信息
+export const reqPayInfo=(orderId)=>requests.get(`/payment/weixin/createNative/${orderId}`)
+//获取订单支付状态
+export const reqPatStatus=(orderId)=>requests.get(`/payment/weixin/queryPayStatus/${orderId}`)

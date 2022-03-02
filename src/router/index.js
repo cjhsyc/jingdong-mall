@@ -34,7 +34,28 @@ const router = new VueRouter({
 
 //全局前置守卫
 router.beforeEach((to, from, next) => {
-    next()
+    const token = store.state.user.token
+    const name = store.state.user.userInfo.name
+    if (token) {//已登录
+        if (to.path === '/login' || to.path === '/register') {
+            next('/')
+        } else {
+            if (name) {//有用户信息
+                next()
+            } else {
+                store.dispatch('getUserInfo').then(res => {//获取用户信息成功
+                    next()
+                }).catch(err => {//token失效，获取用户信息失败
+                    //清除token
+                    store.dispatch('logout').then(res => {
+                        next('/login')
+                    })
+                })
+            }
+        }
+    } else {
+        next()
+    }
 })
 
 export default router

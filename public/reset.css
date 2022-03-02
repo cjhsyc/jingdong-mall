@@ -58,7 +58,7 @@ h3 { font-size: 14px; }
 h4, h5, h6 { font-size: 100%; }
 
 /* 清除浮动 */
-.clearfix::after {
+.clearFix::after {
     display: block;
     height: 0;
     content: "";

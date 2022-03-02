@@ -1,4 +1,4 @@
-import {reqGetCode, reqLogin, reqlogout, reqRegister, reqUserInfo} from "@/api";
+import {reqGetCode, reqLogin, reqLogout, reqRegister, reqUserInfo} from "@/api";
 import getToken from "@/utils/getToken";
 
 const state = {
@@ -54,10 +54,13 @@ const actions = {
         const result = await reqUserInfo()
         if (result.code === 200) {
             commit('getUserInfo', result.data)
+            return 'ok'
+        } else {
+            return Promise.reject(new Error('fail'))
         }
     },
     async logout({commit}) {
-        const result = await reqlogout()
+        const result = await reqLogout()
         if (result.code === 200) {
             commit('logout')
             return 'ok'

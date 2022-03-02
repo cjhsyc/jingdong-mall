@@ -148,12 +148,12 @@ export default {
                 padding: 18px;
 
                 form {
-                    padding: 60px 0 0 0;
+                    padding: 6px 0 0 0;
                     font-size: 12px;
                     line-height: 18px;
 
                     .input-text {
-                        margin-bottom: 46px;
+                        margin-bottom: 6px;
 
                         span {
                             float: left;
@@ -186,7 +186,7 @@ export default {
                     }
 
                     .setting {
-                        margin-top: 90px;
+                        margin-top: 9px;
 
                         label {
                             float: left;
