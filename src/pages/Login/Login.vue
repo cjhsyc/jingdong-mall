@@ -77,9 +77,9 @@ export default {
     methods: {
         login() {
             const {phone, password} = this
-            phone && password && this.$store.dispatch('login', {phone, password}).then(()=>{
-                this.$router.push('/')
-            }).catch(()=>{
+            phone && password && this.$store.dispatch('login', {phone, password}).then(() => {
+                this.$router.push(`${this.$route.query.redirect || '/'}`)
+            }).catch(() => {
                 alert('登录失败！')
             })
         }

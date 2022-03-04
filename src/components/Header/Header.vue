@@ -10,7 +10,7 @@
                     <a>{{ nickName }}</a>
                     <a class="register" @click="logout">退出登录</a>
                 </li>
-                <li><a>我的订单</a></li>
+                <li><router-link to="/center">我的订单</router-link></li>
                 <li><router-link to="/shopCart">我的购物车</router-link></li>
                 <li><a>我的京东</a></li>
                 <li><a>京东会员</a></li>

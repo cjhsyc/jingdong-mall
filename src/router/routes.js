@@ -1,14 +1,3 @@
-import Home from '../pages/Home/Home'
-import Login from '../pages/Login/Login'
-import Search from '../pages/Search/Search'
-import Register from '../pages/Register/Register'
-import Detail from '../pages/Detail/Detail'
-import AddCartSuccess from '@/pages/AddCartSuccess/AddCartSuccess'
-import ShopCart from '@/pages/ShopCart/ShopCart'
-import Trade from '@/pages/Trade/Trade'
-import Pay from '@/pages/Pay/Pay'
-import PaySuccess from '@/pages/PaySuccess/PaySuccess'
-
 export default [
     //重定向：项目刚开始访问/时，定向到首页
     {
@@ -17,17 +6,18 @@ export default [
     },
     {
         path: '/home',
-        component: Home,
+        //路由懒加载，跳转到该路由时才加载组件
+        component: () => import('@/pages/Home/Home'),
         meta: {show: true}
     },
     {
         path: '/login',
-        component: Login,
+        component: () => import('@/pages/Login/Login'),
         meta: {show: false}
     },
     {
         path: '/search/:keyword?',
-        component: Search,
+        component: () => import('@/pages/Search/Search'),
         meta: {show: true},
         name: 'search',
         props: true,
@@ -37,36 +27,70 @@ export default [
     },
     {
         path: '/register',
-        component: Register,
+        component: () => import('@/pages/Register/Register'),
         meta: {show: false}
     },
     {
         path: '/detail/:id',
-        component: Detail
+        component: () => import('@/pages/Detail/Detail')
     },
     {
         path: '/addCartSuccess',
-        component: AddCartSuccess,
+        component: () => import('@/pages/AddCartSuccess/AddCartSuccess'),
         meta: {show: true}
     },
     {
         path: '/shopCart',
-        component: ShopCart,
+        component: () => import('@/pages/ShopCart/ShopCart'),
         meta: {show: true}
     },
     {
         path: '/trade',
-        component: Trade,
-        meta: {show: true}
+        component: () => import('@/pages/Trade/Trade'),
+        meta: {show: true},
+        //路由独享守卫
+        beforeEnter: (to, from, next) => {
+            if (from.path === '/shopCart') {
+                next()
+            } else {
+                next(false)
+            }
+        }
     },
     {
         path: '/pay',
-        component: Pay,
-        meta: {show: true}
+        component: () => import('@/pages/Pay/Pay'),
+        meta: {show: true},
+        beforeEnter: (to, from, next) => {
+            if (from.path === '/trade') {
+                next()
+            } else {
+                next(false)
+            }
+        }
     },
     {
         path: '/paySuccess',
-        component: PaySuccess,
+        component: () => import('@/pages/PaySuccess/PaySuccess'),
         meta: {show: true}
+    },
+    {
+        path: '/center',
+        component: () => import('@/pages/Center/Center'),
+        meta: {show: true},
+        children: [
+            {
+                path: 'myOrder',
+                component: () => import('@/pages/Center/MyOrder/MyOrder')
+            },
+            {
+                path: 'groupOrder',
+                component: () => import('@/pages/Center/GroupOrder/GroupOrder')
+            },
+            {
+                path: '/center',//重定向
+                redirect: 'myOrder'
+            }
+        ]
     }
 ]

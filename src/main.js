@@ -9,6 +9,10 @@ import Pagination from './components/Pagination/Pagination'
 import './mock/mockServe'
 //统一引入api文件中的请求函数
 import * as api from '@/api'
+//图片懒加载插件
+import VueLazyload from 'vue-lazyload'
+//引入表单验证插件
+import '@/plugins/validate'
 //引入element-ui
 import { MessageBox } from 'element-ui';
 Vue.prototype.$msgbox = MessageBox;
@@ -18,6 +22,14 @@ Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.component(TypeNav.name, TypeNav)
 Vue.component(Pagination.name, Pagination)
+
+Vue.use(VueLazyload,{
+    //懒加载默认图片
+    loading:require('@/assets/图片加载中.gif')
+})
+
+import myPlugins from "@/plugins/myPlugins";
+Vue.use(myPlugins,{name:'innerText'})
 
 new Vue({
     render: h => h(App),

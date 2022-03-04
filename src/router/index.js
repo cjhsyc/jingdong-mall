@@ -54,7 +54,12 @@ router.beforeEach((to, from, next) => {
             }
         }
     } else {
-        next()
+        if (to.path.includes('/trade') || to.path.includes('/pay') || to.path.includes('/center')) {
+            //将未登录时要去的地址存为query参数
+            next(`/login?redirect=${to.path}`)
+        } else {
+            next()
+        }
     }
 })
 
