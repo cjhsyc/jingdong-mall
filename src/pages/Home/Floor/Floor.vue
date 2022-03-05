@@ -1,10 +1,10 @@
 <template>
     <div class="floor">
         <div class="py-container">
-            <div class="title clearfix">
+            <div class="title clearFix">
                 <h3 class="fl">{{floor.name}}</h3>
                 <div class="fr">
-                    <ul class="nav-tabs clearfix">
+                    <ul class="nav-tabs clearFix">
                         <li v-for="(item,index) in floor.navList" :key="index" :class="{active:!item.text.indexOf('热门')}">
                             <a href="#" data-toggle="tab">{{item.text}}</a>
                         </li>
