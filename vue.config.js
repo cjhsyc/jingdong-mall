@@ -9,5 +9,8 @@ module.exports = {
                 // pathRewrite:{'^/api':''}
             }
         }
-    }
+    },
+    //打包后不生成map文件
+    productionSourceMap: false,
+    publicPath: './',//默认是'/'
 }

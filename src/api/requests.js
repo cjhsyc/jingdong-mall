@@ -8,7 +8,7 @@ import store from '@/store'
 //request就是axios（进行一些配置）
 const requests = axios.create({
     //配置对象
-    baseURL: 'api',//基础路径，自动加在端口后
+    baseURL: process.env.VUE_APP_BASEURL,//基础路径，自动加在端口后
     timeout: 5000,//超时的时间
 })
 
