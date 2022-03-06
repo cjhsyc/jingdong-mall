@@ -29,7 +29,8 @@ const router = new VueRouter({
     routes,
     scrollBehavior(to, from, savedPosition) {
         return {y: 0}//路由跳转，回到顶部
-    }
+    },
+    // mode:'history'
 })
 
 //全局前置守卫

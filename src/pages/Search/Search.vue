@@ -7,7 +7,7 @@
                 <div class="bread">
                     <ul class="fl sui-breadcrumb">
                         <li>
-                            <a href="#">全部结果</a>
+                            <a>全部结果</a>
                         </li>
                     </ul>
                     <ul class="fl sui-tag">
@@ -66,15 +66,14 @@
                                         </strong>
                                     </div>
                                     <div class="attr">
-                                        <a target="_blank" href="#" :title="goods.title">{{ goods.title }}</a>
+                                        <a :title="goods.title">{{ goods.title }}</a>
                                     </div>
                                     <div class="commit">
                                         <i class="command">已有<span>2000</span>人评价</i>
                                     </div>
                                     <div class="operate">
-                                        <a href="success-cart.html" target="_blank"
-                                           class="sui-btn btn-bordered btn-danger">加入购物车</a>
-                                        <a href="javascript:void(0);" class="sui-btn btn-bordered">收藏</a>
+                                        <a class="sui-btn btn-bordered btn-danger">加入购物车</a>
+                                        <a class="sui-btn btn-bordered">收藏</a>
                                     </div>
                                 </div>
                             </li>
